@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 09:48:37 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/02/15 17:31:31 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/03/30 04:53:46 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,37 +22,56 @@ void	check_length(char *str)
 	}
 }
 
-void	handling_errors(int argc, char *argv[])
+void	handling_errors(int argc, char *argv[], t_tavern **sa)
 {
-	int	i;
-	int	j;
+	int			i;
+	int			j;
+	char		**len;
+	t_tavern	*tmp;
 
-	printf("[%d]\n", argc);
+	// printf("[%d]\n", argc);
 	i = 0;
 	while (argv[++i])
 		analyse_arg(argv[i]);
 	i = 0;
-	while (argv[++i])
+	while (++i < argc)
 	{
-		j = 0;
-		while (argv[++j])
+		// printf("(%s)\n", argv[i]);
+		j = -1;
+		len = ft_split(argv[i], ' ');
+		while (len[++j])
 		{
-			// printf("%s", argv[++i]);
-			check_length(argv[j]);
-			if (i == j)
-			{
-				j++;
-				if (!argv[j])
-					return ;
-			}
-			printf("%s -- %s\n", argv[i], argv[j]);
-			printf("%ld\n", ft_atoi(argv[j]));
-			if (ft_atoi(argv[i]) == ft_atoi(argv[j]))
-				error_out();
-			// if (ft_strlen(argv[i] > 10))
-			// 	if ();
+			// printf("-%s-\n", len[j]);
+			check_length(len[j]);
+			tmp = ft_lstnew_d(ft_atoi(len[j]));
+			ft_lstadd_back_d(sa, tmp);
+			printf("[%p]\n", tmp->previous);
 		}
 	}
+	check_twin(sa, tmp);
+}
+
+void	check_twin(t_tavern **sa, t_tavern *tmp)
+{
+	if ((*sa))
+	{
+		tmp = (*sa);
+		while (tmp -> previous)
+		{
+			tmp = tmp -> previous;
+			if ((*sa)->content == tmp -> content)
+				error_out();
+		}
+		tmp = (*sa);
+		while (tmp -> next)
+		{
+			printf("here\n");
+			tmp = tmp -> next;
+			if ((*sa)->content == tmp -> content)
+				error_out();
+		}
+	}
+	tmp = NULL;
 }
 
 void	error_out(void)
@@ -91,8 +110,8 @@ void	analyse_arg(char *str)
 		// if ((str[i] == '-' || str[i] == '+') && (str[i + 1] == ' '
 		// 		|| str[i + 1] == '\0' || str[i + 1 == '-'
 		// 			&& str[i + 1] == '+']))
-		printf("|||%ld|||\n", trigger);
-		printf("|%c|\n", str[i]);
+		// printf("|||%ld|||\n", trigger);
+		// printf("|%c|\n", str[i]);
 		if (str[i] >= '0' && str[i] <= '9')
 			j++;
 		if (str[i] == ' ' && str[i + 1] == '\0' && j == 0)
@@ -102,21 +121,21 @@ void	analyse_arg(char *str)
 	}
 }
 
-size_t	ft_strlen(char *s)
+size_t	ft_strlen_d(char *s)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = -1;
-	printf("string = %s\n", s);
+	// printf("string = %s\n", s);
 	while (s[++j])
 	{
 		if (s[i] >= '0' && s[i] <= '9')
 			i++;
-		printf("character = %c\n", s[j]);
+		// printf("character = %c\n", s[j]);
 	}
-	printf("length = %d\n", i);
+	// printf("length = %d\n", i);
 	return (i);
 }
 
@@ -201,12 +220,11 @@ size_t	ft_strlen(char *s)
 //         ft_error();
 // }
 
-
-long	ft_atoi(char *str)
+int	ft_atoi(char *str)
 {
-	long		i;
-	long		ishara;
-	long		res;
+	int		i;
+	int		ishara;
+	int		res;
 
 	// printf("\nhe got out\n");
 	i = 0;
@@ -268,7 +286,13 @@ long	ft_atoi(char *str)
 
 int main(int argc, char *argv[])
 {
-	handling_errors(argc, argv);
+	t_tavern	*sa;
+	t_tavern	*sb;
+
+	sa = NULL;
+	handling_errors(argc, argv, &sa);
+	// if (sa == NULL)
+	// 	exit(0);
 	// error_out();
 	return (0);
 }
