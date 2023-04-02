@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 09:48:37 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/03/30 04:53:46 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/02 05:50:10 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ void	handling_errors(int argc, char *argv[], t_tavern **sa)
 		len = ft_split(argv[i], ' ');
 		while (len[++j])
 		{
-			// printf("-%s-\n", len[j]);
+			printf("-%s-\n", len[j]);
 			check_length(len[j]);
 			tmp = ft_lstnew_d(ft_atoi(len[j]));
-			ft_lstadd_back_d(sa, tmp);
+			ft_lstadd_back_d(sa, tmp, 1);
 			printf("[%p]\n", tmp->previous);
 		}
 	}
@@ -53,23 +53,32 @@ void	handling_errors(int argc, char *argv[], t_tavern **sa)
 
 void	check_twin(t_tavern **sa, t_tavern *tmp)
 {
-	if ((*sa))
+	t_tavern	*tmp2;
+
+	tmp2 = *sa;
+	while (tmp2)
 	{
-		tmp = (*sa);
+		tmp = tmp2;
 		while (tmp -> previous)
 		{
 			tmp = tmp -> previous;
-			if ((*sa)->content == tmp -> content)
+			printf("[[[%p]]\n", tmp->previous);
+			if (tmp2->content == tmp -> content)
 				error_out();
 		}
-		tmp = (*sa);
+		tmp = tmp2;
 		while (tmp -> next)
 		{
-			printf("here\n");
 			tmp = tmp -> next;
-			if ((*sa)->content == tmp -> content)
+			printf("[[%p]]]\n", tmp->next);
+			if (tmp2->content == tmp -> content)
 				error_out();
 		}
+		printf("/%d/\n", tmp2->content);
+		tmp2 = tmp2->next;
+		// if (!tmp2)
+		// 	break ;
+		printf("here\n");
 	}
 	tmp = NULL;
 }
@@ -102,8 +111,8 @@ void	analyse_arg(char *str)
 			error_out();
 		if ((str[i] == '-' || str[i] == '+'))
 		{
-			if (str[i - 1] != ' ' && str[i - 1] != '\0' && (str[i + 1] < '0' || str[i + 1] > '9'))
-				trigger++;
+			if (str[i - 1] != ' ' && str[i - 1] != '\0')
+				trigger = 3;
 			if (str[i + 1] < '0' || str[i + 1] > '9')
 				error_out();
 		}
@@ -291,8 +300,19 @@ int main(int argc, char *argv[])
 
 	sa = NULL;
 	handling_errors(argc, argv, &sa);
+	ft_lstadd_back_d(&sa, NULL, 0);
+	// printf("%d\n", search(sa, 0));
 	// if (sa == NULL)
 	// 	exit(0);
 	// error_out();
 	return (0);
 }
+
+// Longest increasing subsecuance ending function.
+
+// whene finding the LIS give to each number of it number 1, other numbers gets 0.
+
+// make the list circular, and add one more member to the struct to give the LIS 1. 0 by default.
+
+// make a fake swap function, what will she do ? this function swaps the list and tries to implement the LIS function to see if it can find 
+// bigger LIS in the list after swaping.

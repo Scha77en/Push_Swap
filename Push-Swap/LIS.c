@@ -6,89 +6,119 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:13:15 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/02/08 19:03:41 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/02 02:59:37 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	search(t_tavern *head, int value)
+int	longest_inc_sub(t_tavern **head)
 {
-	int			l;
-	int			r;
-	t_tavern	*curr;
-	int			i;
-	int			mid;
+	int			length;
+	int			max_length;
+	t_tavern	*compare;
+	t_tavern	*search;
 
-	l = 0;
-	r = 0;
-	i = -1;
-	curr = head;
-	while (curr)
-	{
-		r++;
-		curr = curr->next;
-	}
-	while (l < r)
-	{
-		mid = l + (r - l) / 2;
-		curr = head;
-		while (++i < mid)
-			curr = curr -> next;
-		if (curr -> content < value)
-		{
-			l = mid + 1;
-		}
-		else
-			r = mid;
-	}
-	return (l);
+	assign_value(&search)
 }
 
-int lis(int *arr, int n)
+void	stack_things(t_tavern **sa, t_tavern **sb)
 {
-	t_tavern	*head;
-	t_tavern	*curr;
-	int			index;
-	int			j;
-	int			i;
+	int		i;
 
-	i = -1;
-	j = -1;
-	head = new_node(arr[0]);
-	while (++i < n)
+	i = longest_inc_sub(&sa);
+	while (i < ft_lstsize(*sa))
 	{
-		if (arr[i] > head->content)
+		if (sa -> value == 0)
 		{
-			t_tavern *node = new_node(arr[i]);
-			node->next = head;
-            head = node;
-        }
+			push_to_b(&sa,&sb);
+			i++;
+		}
 		else
-		{
-			index = search(head, arr[i]);
-			curr = head;
-			while (++j < index - 1)
-				curr = curr->next;
-            t_tavern *node = new_node(arr[i]);
-            node->next = curr->next;
-            curr->next = node;
+			shift_up_stack_a(&sa, 1);
+	}
+	
+}
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+int lengthOfLIS(struct Node* head)
+{
+    int length = 0;
+    int max_length = 0;
+    int prev_value = -1;
+    struct Node* current = head;
+    while (current != NULL) {
+        if (current->data > prev_value) {
+            length++;
+            if (length > max_length) {
+                max_length = length;
+            }
+        } else {
+            length = 1;
         }
+        prev_value = current->data;
+        current = current->next;
     }
-    int count = 0;
-    t_tavern *curr = head;
-    while (curr)
-	{
-        count++;
-        curr = curr->next;
+    return max_length;
+}
+
+
+
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf("%d ", current->data);
+        current = current->next;
     }
-    return count;
+    printf("\n");
 }
 
 int main() {
-    int arr[] = {0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15};
-    int n = sizeof(arr) / sizeof(arr[0]);
-    int result = lis(arr, n);
-    printf("Length of Longest Increasing Subsequence is %d\n", result);
+    // example linked list
+    struct Node* head = NULL;
+    struct Node* second = NULL;
+    struct Node* third = NULL;
+    struct Node* fourth = NULL;
+    struct Node* fifth = NULL;
+
+    head = (struct Node*) malloc(sizeof(struct Node));
+    second = (struct Node*) malloc(sizeof(struct Node));
+    third = (struct Node*) malloc(sizeof(struct Node));
+    fourth = (struct Node*) malloc(sizeof(struct Node));
+    fifth = (struct Node*) malloc(sizeof(struct Node));
+
+    head->data = 3;
+    head->next = second;
+
+    second->data = 4;
+    second->next = third;
+
+    third->data = 5;
+    third->next = fourth;
+
+    fourth->data = 1;
+    fourth->next = fifth;
+
+    fifth->data = 6;
+    fifth->next = NULL;
+
+    printf("Linked List: ");
+    printList(head);
+
+    int lis_length = lengthOfLIS(head);
+    printf("Longest increasing subsequence length: %d\n", lis_length);
+
     return 0;
 }
+
+// write a function that compare a single node content with all other contents in the list, if the content of the other node is bigger than the content of the
+// current node, assign to its value 1, and if its begger or equal to it assign to its value 0.
+// after that swap the original list with sa, and again check the LIS, if the if the result of LIS after the sa is begger than the previous one, print sa and save the list.

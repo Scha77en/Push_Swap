@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 09:50:51 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/03/30 04:43:46 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/01 23:30:01 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ typedef struct s_list
 {
 	struct s_list	*previous;
 	int				content;
+	int				value;
 	struct s_list	*next;
 }	t_tavern;
 
-void		ft_lstadd_back_d(t_tavern **lst, t_tavern *new);
+void		ft_lstadd_back_d(t_tavern **lst, t_tavern *new, int v);
 t_tavern	*ft_lstnew_d(int content);
 char		**ft_split(char *s, char c);
 t_tavern	*ft_lstlast(t_tavern *lst);
@@ -56,5 +57,7 @@ char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_strdup(const char *s1);
 size_t		ft_strlen(const char *s);
 void		*ft_memcpy(void *dst, const void *src, size_t n);
+
+int			ft_lstsize(t_tavern *lst);
 
 #endif
