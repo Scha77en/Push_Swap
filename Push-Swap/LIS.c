@@ -6,11 +6,32 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:13:15 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/02 22:56:52 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/03 00:01:19 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	stack_things(t_tavern **sa, t_tavern **sb)
+{
+	int		size;
+	int		max;
+
+	max = longest_inc_sub(sa);
+	size = ft_lstsize(*sa);
+	printf("\033[36mmax = %d\033[0m\n", max);
+	printf("\033[36msize = %d\033[0m\n", size);
+	while (size > max)
+	{
+		if ((*sa)->value == 0)
+		{
+			push_to_b(sa, sb);
+			size--;
+		}
+		else
+			shift_up_stack_a(sa, 1);
+	}
+}
 
 int	longest_inc_sub(t_tavern **head)
 {
@@ -18,8 +39,28 @@ int	longest_inc_sub(t_tavern **head)
 	t_tavern	*final;
 
 	max_length = assign_value(head, &final);
+	fake_swap(head, max_length);
 	return (max_length);
 }
+
+void	fake_swap(t_tavern **head, int max)
+{
+	int		i;
+
+	swap_a(head, 0);
+	i = longest_inc_sub(head);
+	if (i > max)
+	{
+		write(1, "sa\n", 3);
+		max = i;
+		return ;
+	}
+	else
+		swap_a(head, 0);
+
+}
+
+// final structure is extra, it does nothing, remove it later.
 
 int	assign_value(t_tavern **head, t_tavern **final)
 {
@@ -47,14 +88,14 @@ int	assign_value(t_tavern **head, t_tavern **final)
 				search = search->next;
 				i++;
 			}
-			else if (search->content < longest->content)
+			else
 			{
 				printf("Enter2\n");
 				search->value = 0;
 				printf("\033[1;34mThe nodes value : %d\033[0m\n", search->value);
 				search = search->next;
 			}
-			if (search == longest)
+			if (search->next == longest)
 				break ;
 		}
 		if (k < i)
@@ -230,27 +271,28 @@ int main() {
     fourth = (t_tavern*) malloc(sizeof(t_tavern));
     fifth = (t_tavern*) malloc(sizeof(t_tavern));
 
-    head->content = 3;
+    head->content = 1;
     head->next = second;
 
-    second->content = 4;
+    second->content = 45;
     second->next = third;
 
-    third->content = 5;
+    third->content = 9;
     third->next = fourth;
 
-    fourth->content = 1;
+    fourth->content = -6;
     fourth->next = fifth;
 
-    fifth->content = 6;
+    fifth->content = 3;
     fifth->next = head;
 
     // printf("Linked List: ");
     // printList(head);
 
-    int lis_length = longest_inc_sub(&head);
+    // int lis_length = longest_inc_sub(&head);
+	stack_things(&head, &head2);
     int lis_length2 = longestincrseb(&head);
-    printf("Longest increasing subsequence length: {%d}\n", lis_length);
+    // printf("Longest increasing subsequence length: {%d}\n", lis_length);
     printf("Longest increasing subsequence length: --[%d]\n", lis_length2);
 
     return 0;

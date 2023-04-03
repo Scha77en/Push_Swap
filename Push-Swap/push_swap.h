@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 09:50:51 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/02 22:13:11 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/02 23:58:49 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void		*ft_memcpy(void *dst, const void *src, size_t n);
 
 int			ft_lstsize(t_tavern *lst);
 
+void	stack_things(t_tavern **sa, t_tavern **sb);
+void	fake_swap(t_tavern **head, int max);
 int	longest_inc_sub(t_tavern **head);
 int	assign_value(t_tavern **head, t_tavern **final);
 int	longestincrseb(t_tavern **heada);
