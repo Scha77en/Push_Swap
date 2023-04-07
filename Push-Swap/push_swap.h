@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 09:50:51 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/02 23:58:49 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/07 01:49:21 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_list
 	struct s_list	*previous;
 	int				content;
 	int				value;
+	int				value2;
 	struct s_list	*next;
 }	t_tavern;
 
@@ -33,15 +34,14 @@ char		**ft_split(char *s, char c);
 t_tavern	*ft_lstlast(t_tavern *lst);
 void		swap_a(t_tavern **head, int n);
 void		swap_b(t_tavern **head, int n);
-void		swap_a_b(t_tavern **ha, t_tavern **hb);
-void		push_to_a(t_tavern **a, t_tavern **b);
-void		push_to_b(t_tavern **a, t_tavern **b);
-void		shift_up_stack_a(t_tavern **a, int n);
-void		shift_up_stack_b(t_tavern **b, int n);
-void		shift_up_stack_a_b(t_tavern **a, t_tavern **b);
-void		shift_down_stack_a(t_tavern **a, int n);
-void		shift_down_stack_b(t_tavern **b, int n);
-void		shift_down_stack_a_b(t_tavern **a, t_tavern **b);
+void		swap_a_b(t_tavern **sa, t_tavern **sb);
+void		push_to_stack(t_tavern **stack_1, t_tavern **stack_2, int ref);
+void		shift_up_stack_a(t_tavern **sa, int n);
+void		shift_up_stack_b(t_tavern **sb, int n);
+void		shift_up_stack_a_b(t_tavern **sa, t_tavern **sb);
+void		shift_down_stack_a(t_tavern **sa, int n);
+void		shift_down_stack_b(t_tavern **sb, int n);
+void		shift_down_stack_a_b(t_tavern **sa, t_tavern **sb);
 t_tavern	*feeding(char **s);
 void		bubble_sort(int *arr, int n);
 void		analyse_arg(char *str);
