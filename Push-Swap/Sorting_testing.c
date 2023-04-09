@@ -6,45 +6,125 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:48:07 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/02/10 19:55:41 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/08 06:43:08 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap_nodes(t_tavern *a, t_tavern *b)
+void	sort_linked_list(t_tavern **head)
 {
-	int	temp;
+	t_tavern	*current;
+	t_tavern	*next;
 
-	temp = a->data;
-	a->data = b->data;
-	b->data = temp;
+	if (*head == NULL)
+		return ;
+	current = *head;
+	while (1)
+	{
+		next = current->next;
+		while (next != *head)
+		{
+			if (current->content > next->content)
+			{
+				swap_nodes(&current);
+				next = next->next;
+			}
+			current = current->next;
+			if (current == *head)
+				break ;
+		}
+	}
 }
 
-char	*bubble_sort(t_tavern *head)
+void	swap_nodes(t_tavern **head)
 {
-	int			swapped;
-	t_tavern	*ptr1;
-	t_tavern	*lptr;
+	t_tavern	*temp;
+	t_tavern	*curr;
 
-	lptr = NULL;
-	if (head == NULL)
-		return ;
-	swapped = 0;
-	while (swapped)
+	temp = *head;
+	curr = *head;
+	*head = (*head)->next;
+	curr->next = *head;
+	temp->next = (*head)->next;
+	(*head)->next = temp;
+}
+
+int main() {
+    // example linked list
+    t_tavern* tmp = NULL;
+    t_tavern* head = NULL;
+    t_tavern* head2 = NULL;
+    t_tavern* second = NULL;
+    t_tavern* third = NULL;
+    t_tavern* fourth = NULL;
+    t_tavern* fifth = NULL;
+    t_tavern* sixth = NULL;
+    t_tavern* seventh = NULL;
+    t_tavern* eighth = NULL;
+    t_tavern* nineth = NULL;
+    t_tavern* tenth = NULL;
+
+    head = (t_tavern*) malloc(sizeof(t_tavern));
+    second = (t_tavern*) malloc(sizeof(t_tavern));
+    third = (t_tavern*) malloc(sizeof(t_tavern));
+    fourth = (t_tavern*) malloc(sizeof(t_tavern));
+    fifth = (t_tavern*) malloc(sizeof(t_tavern));
+    sixth = (t_tavern*) malloc(sizeof(t_tavern));
+    seventh = (t_tavern*) malloc(sizeof(t_tavern));
+    eighth = (t_tavern*) malloc(sizeof(t_tavern));
+    nineth = (t_tavern*) malloc(sizeof(t_tavern));
+    tenth = (t_tavern*) malloc(sizeof(t_tavern));
+
+    head->content = 40;
+    head->next = second;
+	head->previous = tenth;
+	
+    second->content = 50;
+    second->next = third;
+	second->previous = head;
+
+    third->content = 80;
+    third->next = fourth;
+	third->previous = second;
+
+    fourth->content = 60;
+    fourth->next = fifth;
+	fourth->previous = third;
+
+    fifth->content = 30;
+    fifth->next = sixth;
+	fifth->previous = fourth;
+
+    sixth->content = 90;
+    sixth->next = seventh;
+	sixth->previous = fifth;
+
+    seventh->content = 100;
+    seventh->next = eighth;
+	seventh->previous = sixth;
+
+    eighth->content = 70;
+    eighth->next = nineth;
+	eighth->previous = seventh;
+
+    nineth->content = 10;
+    nineth->next = tenth;
+	nineth->previous = eighth;
+
+    tenth->content = 20;
+    tenth->next = head;
+	tenth->previous = nineth;
+
+	sort_linked_list(&head);
+	printf("out\n");
+	tmp = head;
+	while(1)
 	{
-		swapped = 0;
-		ptr1 = head;
-		while (ptr1 -> next != lptr)
-		{
-			if (ptr1 -> content > ptr1 -> next -> content)
-			{
-				swap_nodes(ptr1, ptr1 -> next);
-				swapped = 1;
-			}
-			ptr1 = ptr1 -> next;
-		}
-		lptr = ptr1;
+		printf("[%d]\n", tmp->content);
+		tmp = tmp->next;
+		if (tmp == head)
+			break ;
 	}
 }
 

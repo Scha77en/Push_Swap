@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:11:57 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/07 01:50:47 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/07 05:09:17 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,45 +20,35 @@ void	push_to_stack(t_tavern **stack_1, t_tavern **stack_2, int ref)
 	if (!*stack_1)
 		return ;
 	if (ref)
-		puts("pb");
+		write(1, "pb\n", 3);
 	else
-		puts("pa");
+		write(1, "pa\n", 3);
 	if (!(*stack_2))
 	{
 		temp = *stack_1;
-		if ((*stack_1)->next == *stack_1)
-			*stack_1 = NULL;
-		else
-		{
-			(*stack_1)->previous->next = (*stack_1)->next;
-			(*stack_1)->next->previous = (*stack_1)->previous;
-			*stack_1 = (*stack_1)->next;
-		}
+		stack_check(stack_1);
 		*stack_2 = temp;
 		(*stack_2)->next = (*stack_2);
 		(*stack_2)->previous = (*stack_2);
 		return ;
 	}
 	temp = (*stack_1);
-	if ((*stack_1)->next == *stack_1)
-		*stack_1 = NULL;
-	else
-	{
-		(*stack_1)->previous->next = (*stack_1)->next;
-		(*stack_1)->next->previous = (*stack_1)->previous;
-		*stack_1 = (*stack_1)->next;
-	}
+	stack_check(stack_1);
 	temp->next = *stack_2;
 	temp->previous = (*stack_2)->previous;
-
 	(*stack_2)->previous->next = temp;
 	(*stack_2)->previous = temp;
 	*stack_2 = temp;
-	// temp -> next = *stack_2;
-	// temp->previous = (*stack_2)->previous;
-	// (*stack_2)->previous = temp;
-	// *stack_2 = temp;
-	// temp2 = (*stack_1); // fix the stack a, the push is successful but the cleanup is not working yet;
-
 }
 
+void	stack_check(t_tavern **stack)
+{
+	if ((*stack)->next == *stack)
+			*stack = NULL;
+	else
+	{
+		(*stack)->previous->next = (*stack)->next;
+		(*stack)->next->previous = (*stack)->previous;
+		*stack = (*stack)->next;
+	}
+}

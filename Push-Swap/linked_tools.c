@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 02:08:50 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/07 00:08:46 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/08 21:07:40 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ t_tavern	*ft_lstnew_d(int content)
 		return (NULL);
 	node1 -> content = content;
 	node1 -> next = NULL;
+	node1 -> small = 0;
+	node1 -> large = 0;
 	node1 -> previous = NULL;
 	return (node1);
 }
@@ -57,15 +59,19 @@ t_tavern	*ft_lstlast(t_tavern *lst)
 	return (lst);
 }
 
-int	ft_lstsize(t_tavern *lst)
+int	ft_lstsize(t_tavern *head)
 {
-	int	count;
+	t_tavern	*lst;
+	int			count;
 
+	lst = head;
 	count = 0;
-	while (lst)
+	while (1)
 	{
 		lst = lst->next;
 		count++;
+		if (lst == head || lst == NULL)
+			break ;
 	}
 	return (count);
 }

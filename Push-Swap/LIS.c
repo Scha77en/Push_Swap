@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:13:15 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/05 14:07:26 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/08 20:47:51 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,136 +60,79 @@
 
 // }
 
-// final structure is extra, it does nothing, remove it later.
-
-int lis_circular(t_tavern *head)
+int	assign_value(t_tavern **head, t_tavern **final)
 {
-    // Initialize the value of the first node to 1
-    head->value = 1;
+	int			i;
+	int			comp;
+	int			k;
+	t_tavern	*search;
+	t_tavern	*longest;
 
-    // Traverse the list and compute the value of each node
-    t_tavern *current = head->next;
-    while (current != head) {
-        // Find the maximum value among the nodes that are less than the current node
-        t_tavern *tmp = current->previous;
-        int max_value = 0;
-        while (tmp != current) {
-            if (tmp->content < current->content && tmp->value > max_value) {
-                max_value = tmp->value;
-            }
-            tmp = tmp->previous;
-        }
-        
-        // Set the value of the current node to the maximum value plus 1
-        current->value = max_value + 1;
-        
-        // Move to the next node
-        current = current->next;
-    }
-    
-    // Find the node with the maximum value
-    t_tavern *max_node = head;
-    current = head->next;
-    while (current != head) {
-        if (current->value > max_node->value) {
-            max_node = current;
-        }
-        current = current->next;
-    }
-    
-    // Set the value of the nodes in the LIS to 1 and the rest to 0
-    int lis_length = max_node->value;
-    current = max_node;
-    while (current != head) {
-        if (current->value == lis_length) {
-            current->value = 1;
-            lis_length--;
-        } else {
-            current->value = 0;
-        }
-        current = current->previous;
-    }
-    if (head->value == 1) {
-        head->value = 0;
-    }
+	k = 0;
+	comp = 0;
+	longest = (*head);
+	final = head;
+	while (head)
+	{
+		// printf("hallo\n");
+		search = (*final);
+		longest = (*final);
+		i = 0;
+		while (1)
+		{
+			printf("\033[1;33mThe node content : %d\033[0m\n", longest->content);
+			printf("\033[1;35mThe node content : %d\033[0m\n", search->content);
+			if (search->content >= longest->content)
+			{
+				printf("Enter\n");
+				search->value = 1;
+				if (comp < final->content - search->content)
+				{
+					comp = final->content - search->content;
+					longest = search;
 
-    // Return the length of the LIS
-    return max_node->value;
-}
-
-// int	assign_value(t_tavern **head, t_tavern **final)
-// {
-// 	int			i;
-// 	int			comp;
-// 	int			k;
-// 	t_tavern	*search;
-// 	t_tavern	*longest;
-
-// 	k = 0;
-// 	comp = 0;
-// 	longest = (*head);
-// 	final = head;
-// 	while (head)
-// 	{
-// 		// printf("hallo\n");
-// 		search = (*final);
-// 		longest = (*final);
-// 		i = 0;
-// 		while (1)
-// 		{
-// 			printf("\033[1;33mThe node content : %d\033[0m\n", longest->content);
-// 			printf("\033[1;35mThe node content : %d\033[0m\n", search->content);
-// 			if (search->content >= longest->content)
-// 			{
-// 				printf("Enter\n");
-// 				search->value = 1;
-// 				if (comp < final->content - search->content)
-// 				{
-// 					comp = final->content - search->content;
-// 					longest = search;
-
-// 				}
-// 				printf("\033[1;34mThe nodes value : %d\033[0m\n", search->value);
-// 				longest = search;
-// 				search = search->next;
-// 				i++;
-// 			}
-// 			else
-// 			{
-// 				printf("Enter2\n");
-// 				if (comp < final->content - search->content)
-// 				{
-// 					comp = final->content - search->content;
-// 					while (longest != (*final))
-// 						{
-// 							longest = longest -> previous;
-// 							longest -> value = 0;
-// 							i--;
-// 						}
-// 						i++;
-// 						search->value = 1;
-// 				}
-// 				search->value = 0;
+				}
+				printf("\033[1;34mThe nodes value : %d\033[0m\n", search->value);
+				longest = search;
+				search = search->next;
+				i++;
+			}
+			else
+			{
+				printf("Enter2\n");
+				if (comp < final->content - search->content)
+				{
+					comp = final->content - search->content;
+					while (longest != (*final))
+						{
+							longest = longest -> previous;
+							longest -> value = 0;
+							i--;
+						}
+						i++;
+						search->value = 1;
+				}
+				search->value = 0;
 				
-// 				printf("\033[1;34mThe nodes value : %d\033[0m\n", search->value);
-// 				search = search->next;
-// 			}
-// 			if (search == (*head))
-// 				break ;
-// 		}
-// 		if (k < i)
-// 		{
-// 			k = i;
-// 			final = &search;
-// 		}
-// 		printf("\n\033[1;31m-- next operation --\033[0m\n");
-// 		final = final->next;
-// 		if ((*final) == (*head))
-// 			break ;
-// 	}
-// 	// printf("%d\n", k);
-// 	return (k);
-// }
+				printf("\033[1;34mThe nodes value : %d\033[0m\n", search->value);
+				search = search->next;
+			}
+			if (search == (*head))
+				break ;
+		}
+		if (k < i)
+		{
+			k = i;
+			final = &search;
+		}
+		printf("\n\033[1;31m-- next operation --\033[0m\n");
+		final = final->next;
+		if ((*final) == (*head))
+			break ;
+	}
+	// printf("%d\n", k);
+	return (k);
+}
 
 // int	assign_value(t_tavern **head, t_tavern **final)
 // {
@@ -293,57 +236,6 @@ int lis_circular(t_tavern *head)
 
 //**********************************************************************************************************************
 
-int	longestincrseb(t_tavern **heada)
-{
-	t_tavern	*tmp;
-	t_tavern	*saver;
-	int			i;
-	int			j;
-
-	i = 0;
-	j = 0;
-	tmp = (*heada);
-	while (1)
-	{
-		j = countlis(&tmp);
-		if (i < j)
-		{
-			i = j;
-			saver = tmp;
-		}
-		tmp = tmp->next;
-		if (tmp == (*heada))
-			break ;
-	}
-	countlis(&saver);
-	return (i);
-}
-
-int	countlis(t_tavern **heada)
-{
-	int		i;
-	t_tavern	*save;
-	t_tavern	*keep;
-
-	i = 0;
-	save = (*heada);
-	keep = save;
-	while (1)
-	{
-		save->value = 0;
-		if (keep->content <= save->content)
-		{
-			keep = save;
-			keep->value = 1;
-			i++;
-		}
-		save = save->next;
-		if (save == (*heada))
-			break ;
-	}
-	return (i);
-}
-
 // int	fakeswap(t_tavern **heada, int *lis)
 // {
 // 	int		new;
@@ -388,36 +280,9 @@ int	countlis(t_tavern **heada)
 
 //***********************************************
 
-int longest_increasing_subsequence(t_tavern *head)
-{
-    if (head == NULL)
-        return 0;
-
-    int n = 0;
-    t_tavern *curr = head;
-    while (curr -> next != head) {
-        curr->value = 1;
-        t_tavern *prev = curr->previous;
-        while (prev != NULL && prev->content < curr->content) {
-            curr->value = curr->value > prev->value + 1 ? curr->value : prev->value + 1;
-            prev = prev->previous;
-        }
-        curr = curr->next;
-    }
-
-    curr = head;
-    while (curr -> next != head) {
-        n = n > curr->value ? n : curr->value;
-        curr->value = 0;
-        curr = curr->next;
-    }
-
-    return n;
-}
-
 int main() {
     // example linked list
-    // t_tavern* head2 = NULL;
+    t_tavern* head2 = NULL;
     t_tavern* head = NULL;
     t_tavern* second = NULL;
     t_tavern* third = NULL;
@@ -484,7 +349,7 @@ int main() {
     // printList(head);
 
     // int lis_length = longest_inc_sub(&head);
-    int lis_length = lis_circular(head);
+    int lis_length = assign_value(&head, &head2);
 	// stack_things(&head, &head2);
     // int lis_length2 = longestincrseb(&head);
     printf("Longest increasing subsequence length: {%d}\n", lis_length);
