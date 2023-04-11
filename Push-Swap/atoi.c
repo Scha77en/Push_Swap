@@ -6,13 +6,13 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 12:25:46 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/02/13 16:33:46 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/09 22:31:12 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-long	ft_atoi(const char *str)
+long	ft_atoi(char *str)
 {
 	long		i;
 	long		ishara;

@@ -6,11 +6,64 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:13:15 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/08 20:47:51 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/11 00:31:18 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+// void	longestincrseb(t_tavern **sa, t_tavern **sb)
+// {
+// 	t_tavern	*tmp;
+// 	t_tavern	*saver;
+// 	int			i;
+// 	int			j;
+
+// 	i = 0;
+// 	j = 0;
+// 	tmp = (*sa);
+// 	while (1)
+// 	{
+// 		j = countlis(&tmp);
+// 		if (i < j)
+// 		{
+// 			i = j;
+// 			saver = tmp;
+// 		}
+// 		tmp = tmp->next;
+// 		if (tmp == (*sa))
+// 			break ;
+// 	}
+// 	countlis(&saver);
+// 	stack_things(sa, sb);
+// }
+
+// int	countlis(t_tavern **sa)
+// {
+// 	int		i;
+// 	t_tavern	*save;
+// 	t_tavern	*keep;
+
+// 	i = 0;
+// 	save = (*sa);
+// 	keep = save;
+// 	while (1)
+// 	{
+// 		save->value = 0;
+// 		if (keep->content <= save->content)
+// 		{
+// 			keep = save;
+// 			keep->value = 1;
+// 			i++;
+// 		}
+// 		save = save->next;
+// 		if (save == (*sa))
+// 			break ;
+// 	}
+// 	return (i);
+// }
+
+//*****************************************************************************
 
 // void	stack_things(t_tavern **sa, t_tavern **sb)
 // {
@@ -60,39 +113,39 @@
 
 // }
 
-int	assign_value(t_tavern **head, t_tavern **final)
+void	assign_value(t_tavern **sa, t_tavern **sb, t_tavern *final)
 {
 	int			i;
-	int			comp;
 	int			k;
+	t_tavern	*best;
 	t_tavern	*search;
 	t_tavern	*longest;
 
 	k = 0;
-	comp = 0;
-	longest = (*head);
-	final = head;
-	while (head)
+	longest = (*sa);
+	final = *sa;
+	while (sa)
 	{
 		// printf("hallo\n");
-		search = (*final);
-		longest = (*final);
+		longest = final;
+		search = final->next;
 		i = 0;
-		while (1)
+		while (search != final)
 		{
-			printf("\033[1;33mThe node content : %d\033[0m\n", longest->content);
-			printf("\033[1;35mThe node content : %d\033[0m\n", search->content);
-			if (search->content >= longest->content)
+			printf("\033[1;33mThe longest S content : %d\033[0m\n", longest->content);
+			printf("\033[1;35mThe search F content : %d\033[0m\n", search->content);
+			if (search->content > longest->content)
 			{
 				printf("Enter\n");
+				longest->value = 1;
 				search->value = 1;
-				if (comp < final->content - search->content)
-				{
-					comp = final->content - search->content;
-					longest = search;
-
-				}
-				printf("\033[1;34mThe nodes value : %d\033[0m\n", search->value);
+				// if (comp < final->content - search->next->content)
+				// {
+				// 	comp = final->content - search->content;
+				// 	longest = search->next;
+				// }
+				printf("\033[1;34mcontent %d -> longest value : %d\033[0m\n", longest->content, longest->value);
+				printf("\033[1;34mcontent %d -> search value : %d\033[0m\n", search->content, search->value);
 				longest = search;
 				search = search->next;
 				i++;
@@ -100,40 +153,52 @@ int	assign_value(t_tavern **head, t_tavern **final)
 			else
 			{
 				printf("Enter2\n");
-				if (comp < final->content - search->content)
-				{
-					comp = final->content - search->content;
-					while (longest != (*final))
-						{
-							longest = longest -> previous;
-							longest -> value = 0;
-							i--;
-						}
-						i++;
-						search->value = 1;
-				}
+				// if (comp < final->content - search->content)
+				// {
+				// 	comp = final->content - search->content;
+				// 	while (longest != final)
+				// 		{
+				// 			longest = longest -> previous;
+				// 			longest -> value = 0;
+				// 			i--;
+				// 		}
+				// 		i++;
+				// 		search->value = 1;
+				// }
 				search->value = 0;
-				
-				printf("\033[1;34mThe nodes value : %d\033[0m\n", search->value);
+				printf("\033[1;34mcontent %d -> search value : %d\033[0m\n\n", search->content, search->value);
 				search = search->next;
 			}
-			if (search == (*head))
-				break ;
 		}
 		if (k < i)
 		{
 			k = i;
-			final = &search;
+			best = longest;
 		}
 		printf("\n\033[1;31m-- next operation --\033[0m\n");
 		final = final->next;
-		if ((*final) == (*head))
+		if (final == (*sa))
 			break ;
 	}
-	// printf("%d\n", k);
-	return (k);
+	smallest_node(sa, 1);
+	put_values(sa, &best);
+	stack_things(sa, sb);
 }
 
+
+void	put_values(t_tavern **sa, t_tavern **best)
+{
+	while ((*best)->content != (*sa)->content)
+		shift_up_stack_a(best, 0);
+	while (1)
+	{
+		if ((*best)->value != (*sa)->value)
+			(*sa)->value = (*best)->value;
+		*best = (*best)->next;
+		if (*best == *sa)
+			break ;
+	}
+}
 // int	assign_value(t_tavern **head, t_tavern **final)
 // {
 // 	int			i;
@@ -185,23 +250,29 @@ int	assign_value(t_tavern **head, t_tavern **final)
 // 	return (k);
 // }
 
-// void	stack_things(t_tavern **sa, t_tavern **sb)
-// {
-// 	int		i;
+void	stack_things(t_tavern **sa, t_tavern **sb)
+{
+	int		size;
 
-// 	i = 0;
-// 	while (i < ft_lstsize(*sa))
-// 	{
-// 		if (sa -> value == 0)
-// 		{
-// 			push_to_b(&sa,&sb);
-// 			i++;
-// 		}
-// 		else
-// 			shift_up_stack_a(&sa, 1);
-// 	}
-	
-// }
+	size = ft_lstsize(*sa);
+	while (size)
+	{
+		if ((*sa)->value == 0)
+		{
+			printf("--------[%d]\n", (*sa)->content);
+			push_to_stack(sa, sb, 1);
+			size--;
+			printf("--------[%d]\n", (*sa)->content);
+		}
+		else
+		{
+			printf("[%d]--------\n", (*sa)->content);
+			shift_up_stack_a(sa, 1);
+			printf("[%d]--------\n", (*sa)->content);
+			size--;
+		}
+	}
+}
 
 // #include <stdio.h>
 // #include <stdlib.h>
@@ -280,83 +351,83 @@ int	assign_value(t_tavern **head, t_tavern **final)
 
 //***********************************************
 
-int main() {
-    // example linked list
-    t_tavern* head2 = NULL;
-    t_tavern* head = NULL;
-    t_tavern* second = NULL;
-    t_tavern* third = NULL;
-    t_tavern* fourth = NULL;
-    t_tavern* fifth = NULL;
-    t_tavern* sixth = NULL;
-    t_tavern* seventh = NULL;
-    t_tavern* eighth = NULL;
-    t_tavern* nineth = NULL;
-    t_tavern* tenth = NULL;
+// int main() {
+//     // example linked list
+//     t_tavern* head2 = NULL;
+//     t_tavern* head = NULL;
+//     t_tavern* second = NULL;
+//     t_tavern* third = NULL;
+//     t_tavern* fourth = NULL;
+//     t_tavern* fifth = NULL;
+//     t_tavern* sixth = NULL;
+//     t_tavern* seventh = NULL;
+//     t_tavern* eighth = NULL;
+//     t_tavern* nineth = NULL;
+//     t_tavern* tenth = NULL;
 
-    head = (t_tavern*) malloc(sizeof(t_tavern));
-    second = (t_tavern*) malloc(sizeof(t_tavern));
-    third = (t_tavern*) malloc(sizeof(t_tavern));
-    fourth = (t_tavern*) malloc(sizeof(t_tavern));
-    fifth = (t_tavern*) malloc(sizeof(t_tavern));
-    sixth = (t_tavern*) malloc(sizeof(t_tavern));
-    seventh = (t_tavern*) malloc(sizeof(t_tavern));
-    eighth = (t_tavern*) malloc(sizeof(t_tavern));
-    nineth = (t_tavern*) malloc(sizeof(t_tavern));
-    tenth = (t_tavern*) malloc(sizeof(t_tavern));
+//     head = (t_tavern*) malloc(sizeof(t_tavern));
+//     second = (t_tavern*) malloc(sizeof(t_tavern));
+//     third = (t_tavern*) malloc(sizeof(t_tavern));
+//     fourth = (t_tavern*) malloc(sizeof(t_tavern));
+//     fifth = (t_tavern*) malloc(sizeof(t_tavern));
+//     sixth = (t_tavern*) malloc(sizeof(t_tavern));
+//     seventh = (t_tavern*) malloc(sizeof(t_tavern));
+//     eighth = (t_tavern*) malloc(sizeof(t_tavern));
+//     nineth = (t_tavern*) malloc(sizeof(t_tavern));
+//     tenth = (t_tavern*) malloc(sizeof(t_tavern));
 
-    head->content = 7;
-    head->next = second;
-	head->previous = tenth;
+//     head->content = 7;
+//     head->next = second;
+// 	head->previous = tenth;
 	
-    second->content = 3;
-    second->next = third;
-	second->previous = head;
+//     second->content = 3;
+//     second->next = third;
+// 	second->previous = head;
 
-    third->content = 8;
-    third->next = fourth;
-	third->previous = second;
+//     third->content = 8;
+//     third->next = fourth;
+// 	third->previous = second;
 
-    fourth->content = 9;
-    fourth->next = fifth;
-	fourth->previous = third;
+//     fourth->content = 9;
+//     fourth->next = fifth;
+// 	fourth->previous = third;
 
-    fifth->content = 0;
-    fifth->next = sixth;
-	fifth->previous = fourth;
+//     fifth->content = 0;
+//     fifth->next = sixth;
+// 	fifth->previous = fourth;
 
-    sixth->content = 4;
-    sixth->next = seventh;
-	sixth->previous = fifth;
+//     sixth->content = 4;
+//     sixth->next = seventh;
+// 	sixth->previous = fifth;
 
-    seventh->content = 6;
-    seventh->next = eighth;
-	seventh->previous = sixth;
+//     seventh->content = 6;
+//     seventh->next = eighth;
+// 	seventh->previous = sixth;
 
-    eighth->content = 1;
-    eighth->next = nineth;
-	eighth->previous = seventh;
+//     eighth->content = 1;
+//     eighth->next = nineth;
+// 	eighth->previous = seventh;
 
-    nineth->content = 2;
-    nineth->next = tenth;
-	nineth->previous = eighth;
+//     nineth->content = 2;
+//     nineth->next = tenth;
+// 	nineth->previous = eighth;
 
-    tenth->content = 10;
-    tenth->next = head;
-	tenth->previous = nineth;
+//     tenth->content = 10;
+//     tenth->next = head;
+// 	tenth->previous = nineth;
 
-    // printf("Linked List: ");
-    // printList(head);
+//     // printf("Linked List: ");
+//     // printList(head);
 
-    // int lis_length = longest_inc_sub(&head);
-    int lis_length = assign_value(&head, &head2);
-	// stack_things(&head, &head2);
-    // int lis_length2 = longestincrseb(&head);
-    printf("Longest increasing subsequence length: {%d}\n", lis_length);
-    // printf("Longest increasing subsequence length: --[%d]\n", lis_length2);
+//     // int lis_length = longest_inc_sub(&head);
+//     int lis_length = assign_value(&head, &head2);
+// 	// stack_things(&head, &head2);
+//     // int lis_length2 = longestincrseb(&head);
+//     printf("Longest increasing subsequence length: {%d}\n", lis_length);
+//     // printf("Longest increasing subsequence length: --[%d]\n", lis_length2);
 
-    return 0;
-}
+//     return 0;
+// }
 
 // write a function that compare a single node content with all other contents in the list, if the content of the other node is bigger than the content of the
 // current node, assign to its value 1, and if its begger or equal to it assign to its value 0.

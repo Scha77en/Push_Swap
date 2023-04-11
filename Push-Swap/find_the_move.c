@@ -6,13 +6,13 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 22:02:25 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/09 06:46:12 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/09 22:30:31 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	calculate_moves(t_tavern **sa, t_tavern **sb)
+void	calculate_moves(t_tavern **sa, t_tavern **sb)
 {
 	t_tavern	*current;
 	t_tavern	*best;
@@ -21,12 +21,78 @@ int	calculate_moves(t_tavern **sa, t_tavern **sb)
 	set_moves_in_a(sa, sb);
 	while (1)
 	{
-		set_moves_in_b(current);
+		set_moves_in_b(&current);
 		current = current->next;
 		if (current == *sb)
 			break ;
 	}
+	while (sb)
+	{
+		best = find_best_move(sb);
+		if (best->mb * best->ma > 0)
+		{
+			while (best->mb && best->ma && best->mb < 0 && best->ma < 0)
+			{
+				shift_down_stack_a_b(sa, sb);
+				best->mb++;
+				best->ma++;
+			}
+			while (best->mb && best->ma && best->mb > 0 && best->ma > 0)
+			{
+				shift_up_stack_a_b(sa, sb);
+				best->mb--;
+				best->ma--;
+			}
+			while (best->mb && best->mb < 0)
+			{
+				shift_down_stack_b(sb, 1);
+				best->mb++;
+			}
+			while (best->ma && best->ma < 0)
+			{
+				shift_down_stack_a(sa, 1);
+				best->ma++;
+			}
+			while (best->mb && best->mb > 0)
+			{
+				shift_up_stack_b(sb, 1);
+				best->mb--;
+			}
+			while (best->ma && best->ma < 0)
+			{
+				shift_up_stack_a(sa, 1);
+				best->ma--;
+			}
+			push_to_stack(sa, sb, 0);
+		}
+		if (best->mb * best->ma <= 0)
+		{
+			while (best->mb && best->mb > 0)
+			{
+				shift_up_stack_b(sb, 1);
+				best->mb--;
+			}
+			while (best->mb && best->mb < 0)
+			{
+				shift_down_stack_b(sb, 1);
+				best->mb++;
+			}
+			while (best->ma && best->ma > 0)
+			{
+				shift_up_stack_a(sa, 1);
+				best->ma--;
+			}
+			while (best->ma && best->ma < 0)
+			{
+				shift_down_stack_a(sa, 1);
+				best->ma++;
+			}
+			push_to_stack(sb, sa, 0);
+		}
+	}
 }
+
+// void	shifting_nodes(t_tavern **sa, t_tavern **sb)
 
 void	set_moves_in_b(t_tavern **stack)
 {
@@ -34,7 +100,7 @@ void	set_moves_in_b(t_tavern **stack)
 	int			position;
 	int			size;
 
-	size = ft_lstsize(*sb);
+	size = ft_lstsize(*stack);
 	current = *stack;
 	while (1)
 	{
@@ -56,8 +122,8 @@ void	set_moves_in_a(t_tavern **sa, t_tavern **sb)
 	int			size;
 
 	size = ft_lstsize(*sa);
-	current_a = sa;
-	current_b = sb;
+	current_a = *sa;
+	current_b = *sb;
 	while (1)
 	{
 		current_b->ma = 0;
@@ -72,20 +138,21 @@ void	set_moves_in_a(t_tavern **sa, t_tavern **sb)
 				break ;
 		}
 		if (current_b->ma > (size / 2))
-			current_b->ma = current->ma - size;
+			current_b->ma = current_b->ma - size;
 		current_b = current_b->next;
 		if (current_b == *sb)
 			break ;
 	}
 }
 
-void	find_best_move(t_tavern **stack)
+t_tavern	*find_best_move(t_tavern **stack)
 {
 	t_tavern	*current;
 	t_tavern	*best;
 	int			moves;
 	int			best_move;
 
+	best_move = 0;
 	current = *stack;
 	best = *stack;
 	while (1)
@@ -97,8 +164,12 @@ void	find_best_move(t_tavern **stack)
 		else if (current->ma < 0 && current->mb < 0)
 			moves = (current->ma * -1) + (current->mb * -1);
 		if (best_move > moves)
-			best_move = moves;
+			best = current;
+			current = current->next;
+		if (current == *stack)
+			break ;
 	}
+	return (best);
 }
 
 // probably you should give the nodes an index to indicate what
@@ -114,7 +185,7 @@ int	node_position(t_tavern *current, t_tavern **stack)
 	while (1)
 	{
 		i++;
-		if (current->content == stack->content)
+		if (current->content == (*stack)->content)
 			break ;
 		search = search->next;
 	}

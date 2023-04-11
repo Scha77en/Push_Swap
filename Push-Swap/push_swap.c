@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 09:48:37 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/02 05:50:10 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/10 21:56:34 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	check_length(char *str)
 {
-	if (ft_atoi(str) > 2147483647 || ft_atoi(str) < -2147483648
-		|| ft_strlen(str) > 10)
+	if (ft_atoi(str) > (long)2147483647 || ft_atoi(str) < (long)(-2147483648)
+		|| ft_strlen(str) > 11)
 	{
 		write (2, "Error\n", 6);
 		exit(11);
@@ -41,11 +41,11 @@ void	handling_errors(int argc, char *argv[], t_tavern **sa)
 		len = ft_split(argv[i], ' ');
 		while (len[++j])
 		{
-			printf("-%s-\n", len[j]);
+			// printf("-%s-\n", len[j]);
 			check_length(len[j]);
 			tmp = ft_lstnew_d(ft_atoi(len[j]));
 			ft_lstadd_back_d(sa, tmp, 1);
-			printf("[%p]\n", tmp->previous);
+			// printf("[%p]\n", tmp->previous);
 		}
 	}
 	check_twin(sa, tmp);
@@ -62,7 +62,7 @@ void	check_twin(t_tavern **sa, t_tavern *tmp)
 		while (tmp -> previous)
 		{
 			tmp = tmp -> previous;
-			printf("[[[%p]]\n", tmp->previous);
+			// printf("[[[%p]]\n", tmp->previous);
 			if (tmp2->content == tmp -> content)
 				error_out();
 		}
@@ -70,15 +70,15 @@ void	check_twin(t_tavern **sa, t_tavern *tmp)
 		while (tmp -> next)
 		{
 			tmp = tmp -> next;
-			printf("[[%p]]]\n", tmp->next);
+			// printf("[[%p]]]\n", tmp->next);
 			if (tmp2->content == tmp -> content)
 				error_out();
 		}
-		printf("/%d/\n", tmp2->content);
+		// printf("/%d/\n", tmp2->content);
 		tmp2 = tmp2->next;
 		// if (!tmp2)
 		// 	break ;
-		printf("here\n");
+		// printf("here\n");
 	}
 	tmp = NULL;
 }
@@ -229,11 +229,11 @@ size_t	ft_strlen_d(char *s)
 //         ft_error();
 // }
 
-int	ft_atoi(char *str)
+long	ft_atoi(char *str)
 {
-	int		i;
-	int		ishara;
-	int		res;
+	long		i;
+	long		ishara;
+	long		res;
 
 	// printf("\nhe got out\n");
 	i = 0;
@@ -293,18 +293,20 @@ int	ft_atoi(char *str)
 // 	return (0);
 // }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	t_tavern	*sa;
 	t_tavern	*sb;
+	t_tavern	*final;
 
 	sa = NULL;
+	final = NULL;
 	handling_errors(argc, argv, &sa);
 	ft_lstadd_back_d(&sa, NULL, 0);
-	// printf("%d\n", search(sa, 0));
-	// if (sa == NULL)
-	// 	exit(0);
-	// error_out();
+	assign_value(&sa, &sb, final);
+	printf("got out 1\n");
+	move_smallest(&sa, &sb);
+	printf("got out 2\n");
 	return (0);
 }
 

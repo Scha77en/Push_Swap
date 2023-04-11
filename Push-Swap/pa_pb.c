@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:11:57 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/07 05:09:17 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/09 22:15:05 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	push_to_stack(t_tavern **stack_1, t_tavern **stack_2, int ref)
 {
 	t_tavern	*temp;
-	t_tavern	*temp2;
 
 	if (!*stack_1)
 		return ;

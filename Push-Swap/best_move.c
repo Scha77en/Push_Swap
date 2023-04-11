@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 02:51:07 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/08 22:00:21 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/09 22:23:29 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	move_smallest(t_tavern **sa, t_tavern **sb)
 	i = -1;
 	size = ft_lstsize(*sb);
 	current = *sb;
+	sort_stack_a(sa);
 	while (1)
 	{
 		i++;
@@ -125,18 +126,21 @@ void	move_smallest(t_tavern **sa, t_tavern **sb)
 	}
 }
 
-void	rotate_sa(t_tavern **sa, t_tavern **sb)
+void	sort_stack_a(t_tavern **sa)
 {
 	t_tavern	*current;
 	int			moves;
 	int			i;
+	int			size;
 
 	i = -1;
+	size = ft_lstsize(*sa);
+	smallest_node(sa, 2);
 	current = *sa;
 	while (1)
 	{
 		i++;
-		if (current->value == -1)
+		if (current->value == -2)
 		{
 			if (i > (size / 2))
 			{
@@ -155,7 +159,6 @@ void	rotate_sa(t_tavern **sa, t_tavern **sb)
 					i--;
 				}
 			}
-			push_to_stack(sb, sa, 0);
 			break ;
 		}
 		current = current->next;

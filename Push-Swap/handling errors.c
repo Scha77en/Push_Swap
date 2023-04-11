@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 19:57:29 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/02/14 20:15:32 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/09 22:13:53 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void    check_arg(char *s)
 			ft_error();
 }
 
-int main(void)
-{
-	check_arg(char *s);
-	return (0);
-}
+// int main(void)
+// {
+// 	check_arg(char *s);
+// 	return (0);
+// }
