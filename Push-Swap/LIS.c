@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:13:15 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/11 00:31:18 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/11 02:37:49 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,47 +126,29 @@ void	assign_value(t_tavern **sa, t_tavern **sb, t_tavern *final)
 	final = *sa;
 	while (sa)
 	{
-		// printf("hallo\n");
 		longest = final;
 		search = final->next;
 		i = 0;
 		while (search != final)
 		{
-			printf("\033[1;33mThe longest S content : %d\033[0m\n", longest->content);
-			printf("\033[1;35mThe search F content : %d\033[0m\n", search->content);
+			// printf("\033[1;33mThe longest S content : %d\033[0m\n", longest->content);
+			// printf("\033[1;35mThe search F content : %d\033[0m\n", search->content);
 			if (search->content > longest->content)
 			{
-				printf("Enter\n");
+				// printf("Enter\n");
 				longest->value = 1;
 				search->value = 1;
-				// if (comp < final->content - search->next->content)
-				// {
-				// 	comp = final->content - search->content;
-				// 	longest = search->next;
-				// }
-				printf("\033[1;34mcontent %d -> longest value : %d\033[0m\n", longest->content, longest->value);
-				printf("\033[1;34mcontent %d -> search value : %d\033[0m\n", search->content, search->value);
+				// printf("\033[1;34mcontent %d -> longest value : %d\033[0m\n", longest->content, longest->value);
+				// printf("\033[1;34mcontent %d -> search value : %d\0033[0m\n", search->content, search->value);
 				longest = search;
 				search = search->next;
 				i++;
 			}
 			else
 			{
-				printf("Enter2\n");
-				// if (comp < final->content - search->content)
-				// {
-				// 	comp = final->content - search->content;
-				// 	while (longest != final)
-				// 		{
-				// 			longest = longest -> previous;
-				// 			longest -> value = 0;
-				// 			i--;
-				// 		}
-				// 		i++;
-				// 		search->value = 1;
-				// }
+				// printf("Enter2\n");
 				search->value = 0;
-				printf("\033[1;34mcontent %d -> search value : %d\033[0m\n\n", search->content, search->value);
+				// printf("\033[1;34mcontent %d -> search value : %d\033[0m\n\n", search->content, search->value);
 				search = search->next;
 			}
 		}
@@ -175,7 +157,7 @@ void	assign_value(t_tavern **sa, t_tavern **sb, t_tavern *final)
 			k = i;
 			best = longest;
 		}
-		printf("\n\033[1;31m-- next operation --\033[0m\n");
+		// printf("\n\033[1;31m-- next operation --\033[0m\n");
 		final = final->next;
 		if (final == (*sa))
 			break ;
@@ -188,13 +170,18 @@ void	assign_value(t_tavern **sa, t_tavern **sb, t_tavern *final)
 
 void	put_values(t_tavern **sa, t_tavern **best)
 {
+	t_tavern	*current;
+
+	current = *sa;
 	while ((*best)->content != (*sa)->content)
 		shift_up_stack_a(best, 0);
 	while (1)
 	{
-		if ((*best)->value != (*sa)->value)
+		if ((*best)->value != current->value)
 			(*sa)->value = (*best)->value;
+		// printf("content [%d] -> value [%d]\n", current->content, current->value);
 		*best = (*best)->next;
+		current = current->next;
 		if (*best == *sa)
 			break ;
 	}
@@ -259,16 +246,16 @@ void	stack_things(t_tavern **sa, t_tavern **sb)
 	{
 		if ((*sa)->value == 0)
 		{
-			printf("--------[%d]\n", (*sa)->content);
+			// printf("--------[%d]\n", (*sa)->content);
 			push_to_stack(sa, sb, 1);
 			size--;
-			printf("--------[%d]\n", (*sa)->content);
+			// printf("--------[%d]\n", (*sa)->content);
 		}
 		else
 		{
-			printf("[%d]--------\n", (*sa)->content);
+			// printf("[%d]--------\n", (*sa)->content);
 			shift_up_stack_a(sa, 1);
-			printf("[%d]--------\n", (*sa)->content);
+			// printf("[%d]--------\n", (*sa)->content);
 			size--;
 		}
 	}

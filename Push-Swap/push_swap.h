@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 09:50:51 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/11 00:16:17 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/11 01:43:32 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void		set_moves_in_a(t_tavern **sa, t_tavern **sb);
 t_tavern	*find_best_move(t_tavern **stack);
 int			node_position(t_tavern *current, t_tavern **stack);
 void		put_values(t_tavern **sa, t_tavern **best);
+int			check_smallest(t_tavern **stack);
 
 void		longestincrseb(t_tavern **sa, t_tavern **sb);
 int			countlis(t_tavern **sa);

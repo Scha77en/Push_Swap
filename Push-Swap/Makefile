@@ -8,6 +8,8 @@ CC = cc
 
 FLAGS = -Wall -Wextra -Werror
 
+# -g -fsanitize=address 
+
 RM = rm -rf
 
 all : ${NAME}

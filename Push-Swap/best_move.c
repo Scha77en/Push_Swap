@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 02:51:07 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/09 22:23:29 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/11 02:38:17 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,34 +95,38 @@ void	move_smallest(t_tavern **sa, t_tavern **sb)
 	size = ft_lstsize(*sb);
 	current = *sb;
 	sort_stack_a(sa);
-	while (1)
+	// printf("[%d] -- [%d]\n", (*sa)->content, (*sa)->value);
+	if (check_smallest(sb))
 	{
-		i++;
-		if (current->value == -1)
+		while (1)
 		{
-			if (i > (size / 2))
+			i++;
+			if (current->value == -1)
 			{
-				moves = size - i;
-				while (moves)
+				if (i > (size / 2))
 				{
-					shift_down_stack_b(sa, 1);
-					moves--;
+					moves = size - i;
+					while (moves)
+					{
+						shift_down_stack_b(sa, 1);
+						moves--;
+					}
 				}
-			}
-			else
-			{
-				while (i)
+				else
 				{
-					shift_up_stack_b(sa, 1);
-					i--;
+					while (i)
+					{
+						shift_up_stack_b(sa, 1);
+						i--;
+					}
 				}
+				push_to_stack(sb, sa, 0);
+				break ;
 			}
-			push_to_stack(sb, sa, 0);
-			break ;
+			current = current->next;
+			if (current == *sa)
+				break ;
 		}
-		current = current->next;
-		if (current == *sa)
-			break ;
 	}
 }
 
@@ -132,22 +136,29 @@ void	sort_stack_a(t_tavern **sa)
 	int			moves;
 	int			i;
 	int			size;
+	int			v;
 
 	i = -1;
 	size = ft_lstsize(*sa);
-	smallest_node(sa, 2);
+	if (check_smallest(sa))
+		v = -1;
+	else
+	{
+		smallest_node(sa, 2);
+		v = -2;
+	}
 	current = *sa;
 	while (1)
 	{
 		i++;
-		if (current->value == -2)
+		if (current->value == v)
 		{
 			if (i > (size / 2))
 			{
 				moves = size - i;
 				while (moves)
 				{
-					shift_down_stack_b(sa, 1);
+					shift_down_stack_a(sa, 1);
 					moves--;
 				}
 			}
@@ -155,7 +166,7 @@ void	sort_stack_a(t_tavern **sa)
 			{
 				while (i)
 				{
-					shift_up_stack_b(sa, 1);
+					shift_up_stack_a(sa, 1);
 					i--;
 				}
 			}
@@ -165,4 +176,20 @@ void	sort_stack_a(t_tavern **sa)
 		if (current == *sa)
 			break ;
 	}
+}
+
+int		check_smallest(t_tavern **stack)
+{
+	t_tavern	*current;
+
+	current = *stack;
+	while (1)
+	{
+		if (current->value == -1)
+			return (1);
+		current = current->next;
+		if (current == *stack)
+			break ;
+	}
+	return (0);
 }

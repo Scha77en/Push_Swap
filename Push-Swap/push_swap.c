@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 09:48:37 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/10 21:56:34 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/11 02:38:56 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -304,9 +304,10 @@ int	main(int argc, char *argv[])
 	handling_errors(argc, argv, &sa);
 	ft_lstadd_back_d(&sa, NULL, 0);
 	assign_value(&sa, &sb, final);
-	printf("got out 1\n");
 	move_smallest(&sa, &sb);
-	printf("got out 2\n");
+	// printf("got out 1\n");
+	calculate_moves(&sa, &sb);
+	// printf("got out 2\n");
 	return (0);
 }
 

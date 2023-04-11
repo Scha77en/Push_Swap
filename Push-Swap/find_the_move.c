@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 22:02:25 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/09 22:30:31 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/11 02:38:37 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,11 @@ void	calculate_moves(t_tavern **sa, t_tavern **sb)
 	t_tavern	*best;
 
 	current = *sb;
-	set_moves_in_a(sa, sb);
-	while (1)
+	// printf("all moves are set\n");
+	while (*sb)
 	{
-		set_moves_in_b(&current);
-		current = current->next;
-		if (current == *sb)
-			break ;
-	}
-	while (sb)
-	{
+		set_moves_in_a(sa, sb);
+		set_moves_in_b(sb);
 		best = find_best_move(sb);
 		if (best->mb * best->ma > 0)
 		{
@@ -89,6 +84,7 @@ void	calculate_moves(t_tavern **sa, t_tavern **sb)
 			}
 			push_to_stack(sb, sa, 0);
 		}
+		sort_stack_a(sa);
 	}
 }
 
@@ -99,19 +95,21 @@ void	set_moves_in_b(t_tavern **stack)
 	t_tavern	*current;
 	int			position;
 	int			size;
+	int			i;
 
 	size = ft_lstsize(*stack);
+	i = ft_lstsize(*stack);
 	current = *stack;
-	while (1)
+	while (i)
 	{
 		position = node_position(current, stack);
+		// printf("%d\n", position);
 		if (position > (size / 2))
 				current->mb = position - size;
-		else
+		else if (position <= (size / 2))
 			current->mb = position;
 		current = current->next;
-		if (current == *stack)
-			break ;
+		i--;
 	}
 }
 
@@ -185,7 +183,7 @@ int	node_position(t_tavern *current, t_tavern **stack)
 	while (1)
 	{
 		i++;
-		if (current->content == (*stack)->content)
+		if (current->content == search->content)
 			break ;
 		search = search->next;
 	}
