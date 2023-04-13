@@ -1,4 +1,5 @@
-SRC = push_swap.c sa_sb_ss.c pa_pb.c ra_rb_rr.c rra_rrb_rrr.c linked_tools.c cheking_tools.c indexing.c
+SRC = push_swap.c sa_sb_ss.c pa_pb.c ra_rb_rr.c rra_rrb_rrr.c linked_tools.c cheking_tools.c indexing.c \
+small_sorts.c
 
 OBJ = ${SRC:.c=.o}
 

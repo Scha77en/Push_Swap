@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 02:08:50 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/12 21:09:40 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/13 07:55:08 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ t_tavern	*ft_lstnew_d(int content)
 	node1 -> content = content;
 	node1 -> next = NULL;
 	node1 -> value = -2;
-	node1 -> large = 0;
 	node1 -> previous = NULL;
 	return (node1);
 }
@@ -75,18 +74,3 @@ int	ft_lstsize(t_tavern *head)
 	}
 	return (count);
 }
-
-// void	ft_lstadd_front(t_tavern **lst, t_tavern **new)
-// {
-// 	if (!lst)
-// 	{
-// 		*lst = (*new);
-// 		(*lst)->next = NULL;
-// 		(*lst)->previous = NULL;
-// 		return ;
-// 	}
-// 	(*new)-> next = *lst;
-// 	(*new)->previous = (*lst)->previous;
-// 	(*lst)->previous = *new;
-// 	(*lst)->next = 
-// }

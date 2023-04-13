@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 09:48:37 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/12 21:31:13 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/13 07:40:47 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	check_length(char *str)
 		|| ft_strlen(str) > 11)
 	{
 		write (2, "Error\n", 6);
-		exit(11);
+		exit(1);
 	}
 }
 
@@ -86,7 +86,7 @@ void	check_twin(t_tavern **sa, t_tavern *tmp)
 void	error_out(void)
 {
 	write (2, "Error\n", 6);
-	exit(100);
+	exit(1);
 }
 
 void	analyse_arg(char *str)
