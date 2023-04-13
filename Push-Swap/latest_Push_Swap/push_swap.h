@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 09:50:51 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/13 08:09:03 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/13 08:22:17 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void		small_sorts(t_tavern **sa, t_tavern **sb);
 void		sort_two(t_tavern **sa);
 void		sort_three(t_tavern **sa);
 void		sort_four(t_tavern **sa, t_tavern **sb);
+void		check_str(char *str, long i, long trigger);
 void		sort_five(t_tavern **sa, t_tavern **sb);
 t_tavern	*smallest_node(t_tavern **head);
-void		check_str(char *str, long i, long trigger);
 
 #endif
