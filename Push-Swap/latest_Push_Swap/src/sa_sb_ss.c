@@ -6,17 +6,21 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:11:49 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/13 07:47:00 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/14 13:47:33 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 void	swap_a(t_tavern **head, int n)
 {
 	t_tavern	*temp;
 	t_tavern	*curr;
+	int			size;
 
+	size = ft_lstsize(*head);
+	if (size <= 1)
+		return ;
 	temp = *head;
 	curr = *head;
 	*head = (*head)->next;
@@ -33,7 +37,11 @@ void	swap_b(t_tavern **head, int n)
 {
 	t_tavern	*temp;
 	t_tavern	*curr;
+	int			size;
 
+	size = ft_lstsize(*head);
+	if (size <= 1)
+		return ;
 	temp = *head;
 	curr = *head;
 	*head = (*head)->next;

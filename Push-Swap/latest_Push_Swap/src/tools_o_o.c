@@ -6,11 +6,11 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 02:51:07 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/13 07:53:10 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/13 23:38:17 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 int	node_position(t_tavern *current, t_tavern **stack)
 {

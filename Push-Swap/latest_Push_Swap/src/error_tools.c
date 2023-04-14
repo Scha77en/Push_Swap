@@ -6,11 +6,11 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 09:48:37 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/13 07:54:12 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/13 23:37:46 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 void	check_str(char *str, long i, long trigger)
 {

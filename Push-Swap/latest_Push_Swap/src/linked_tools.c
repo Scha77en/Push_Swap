@@ -6,11 +6,11 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 02:08:50 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/13 07:55:08 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/14 13:44:30 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 void	ft_lstadd_back_d(t_tavern **lst, t_tavern *new, int v)
 {
@@ -65,7 +65,7 @@ int	ft_lstsize(t_tavern *head)
 
 	lst = head;
 	count = 0;
-	while (1)
+	while (lst)
 	{
 		lst = lst->next;
 		count++;

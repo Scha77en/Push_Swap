@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   handling_errors.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/05 09:48:37 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/13 08:08:53 by aouhbi           ###   ########.fr       */
+/*   Created: 2023/04/14 00:14:39 by aouhbi            #+#    #+#             */
+/*   Updated: 2023/04/14 00:28:25 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap_bonus.h"
 
 void	check_length(char *str)
 {
@@ -88,31 +88,28 @@ void	analyse_arg(char *str)
 	check_str(str, i, trigger);
 }
 
-int	main(int argc, char *argv[])
+void	check_str(char *str, long i, long trigger)
 {
-	t_tavern	*sa;
-	t_tavern	*sb;
-	int			v;
-	int			z;
+	long	j;
 
-	v = 0;
-	z = 0;
-	sa = NULL;
-	handling_errors(argc, argv, &sa);
-	ft_lstadd_back_d(&sa, NULL, 0);
-	if (check_args_o_o(&sa))
+	j = 0;
+	while (str[++i])
 	{
-		if (argc <= 6)
-			small_sorts(&sa, &sb);
-		else
+		if (((str[i] < '0' || str[i] > '9') && str[i] != ' '
+				&& str[i] != '-' && str[i] != '+'))
+			error_out();
+		if ((str[i] == '-' || str[i] == '+'))
 		{
-			if (argc >= 500)
-				v = 1;
-			sort_index(&sa, &sb, v, z);
-			push_from_sb(&sa, &sb);
+			if (str[i - 1] != ' ' && str[i - 1] != '\0')
+				trigger = 3;
+			if (str[i + 1] < '0' || str[i + 1] > '9')
+				error_out();
 		}
+		if (str[i] >= '0' && str[i] <= '9')
+			j++;
+		if (str[i] == ' ' && str[i + 1] == '\0' && j == 0)
+			error_out();
+		if (trigger > 2)
+			error_out();
 	}
-	if (!check_args_o_o(&sa))
-		exit(1);
-	return (0);
 }

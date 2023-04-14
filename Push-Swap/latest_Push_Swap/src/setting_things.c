@@ -6,11 +6,11 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:02:57 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/13 08:17:40 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/13 23:38:10 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 void	sort_index(t_tavern **sa, t_tavern **sb, int v, int z)
 {

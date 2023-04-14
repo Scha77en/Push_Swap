@@ -6,11 +6,11 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 02:11:21 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/13 07:23:43 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/13 23:49:50 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap_bonus.h"
 
 static int	rows_num(char *str, char c)
 {

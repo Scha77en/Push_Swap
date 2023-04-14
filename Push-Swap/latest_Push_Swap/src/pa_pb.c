@@ -6,11 +6,11 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:11:57 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/13 07:31:00 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/13 23:37:51 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 void	push_to_stack(t_tavern **stack_1, t_tavern **stack_2, int ref)
 {
