@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 09:48:37 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/13 23:37:57 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/15 04:47:10 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,22 +99,22 @@ int	main(int argc, char *argv[])
 	t_tavern	*sa;
 	t_tavern	*sb;
 	int			v;
-	int			z;
+	int			size;
 
 	v = 0;
-	z = 0;
 	sa = NULL;
 	handling_errors(argc, argv, &sa);
 	ft_lstadd_back_d(&sa, NULL, 0);
+	size = ft_lstsize(sa);
 	if (check_args_o_o(&sa))
 	{
-		if (argc <= 6)
+		if (size <= 5)
 			small_sorts(&sa, &sb);
 		else
 		{
-			if (argc >= 500)
+			if (size >= 500)
 				v = 1;
-			sort_index(&sa, &sb, v, z);
+			sort_index(&sa, &sb, v);
 			push_from_sb(&sa, &sb);
 		}
 	}

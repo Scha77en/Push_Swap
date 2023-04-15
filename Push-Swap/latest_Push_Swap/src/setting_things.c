@@ -6,18 +6,20 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:02:57 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/13 23:38:10 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/15 04:47:22 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-void	sort_index(t_tavern **sa, t_tavern **sb, int v, int z)
+void	sort_index(t_tavern **sa, t_tavern **sb, int v)
 {
 	t_tavern	*head;
 	int			i;
 	int			size;
+	int			z;
 
+	z = 0;
 	size = ft_lstsize(*sa);
 	i = 0;
 	head = min_value(sa);
@@ -82,12 +84,10 @@ void	pushing_to_sb(t_tavern **sa, t_tavern **sb, int v, int z)
 
 void	push_from_sb(t_tavern **sa, t_tavern **sb)
 {
-	t_tavern	*current;
 	t_tavern	*largest;
 	int			size;
 	int			position;
 
-	current = *sb;
 	size = ft_lstsize(*sb);
 	while (size)
 	{
@@ -100,6 +100,7 @@ void	push_from_sb(t_tavern **sa, t_tavern **sb)
 		push_to_s(sa, sb, largest);
 		size--;
 	}
+	exit(0);
 }
 
 void	set_moves_in_b(t_tavern **stack)
