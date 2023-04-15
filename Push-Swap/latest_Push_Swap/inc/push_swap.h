@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 09:50:51 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/15 04:46:53 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/15 20:48:42 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ long		ft_atoi(char *str);
 void		analyse_arg2(char	*str);
 void		error_out(void);
 void		check_length(char *str);
-void		check_twin(t_tavern **sa, t_tavern *tmp);
+void		check_twin(t_tavern **sa);
 void		handling_errors(int argc, char *argv[], t_tavern **sa);
 char		*ft_strdup(const char *s1);
 size_t		ft_strlen(const char *s);
@@ -71,5 +71,6 @@ void		sort_four(t_tavern **sa, t_tavern **sb);
 void		check_str(char *str, long i, long trigger);
 void		sort_five(t_tavern **sa, t_tavern **sb);
 t_tavern	*smallest_node(t_tavern **head);
+void		free_mem(char **ptr, int j);
 
 #endif

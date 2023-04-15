@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 09:48:37 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/15 04:47:10 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/15 20:49:47 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,15 @@ void	handling_errors(int argc, char *argv[], t_tavern **sa)
 			check_length(len[j]);
 			tmp = ft_lstnew_d(ft_atoi(len[j]));
 			ft_lstadd_back_d(sa, tmp, 1);
+			free_mem(len, j);
 		}
 	}
-	check_twin(sa, tmp);
+	check_twin(sa);
 }
 
-void	check_twin(t_tavern **sa, t_tavern *tmp)
+void	check_twin(t_tavern **sa)
 {
+	t_tavern	*tmp;
 	t_tavern	*tmp2;
 
 	tmp2 = *sa;
@@ -70,7 +72,6 @@ void	check_twin(t_tavern **sa, t_tavern *tmp)
 		}
 		tmp2 = tmp2->next;
 	}
-	tmp = NULL;
 }
 
 void	analyse_arg(char *str)
