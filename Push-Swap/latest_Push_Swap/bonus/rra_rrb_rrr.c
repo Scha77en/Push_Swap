@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:12:09 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/14 13:46:35 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/16 03:35:18 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,4 @@ void	shift_down_stack_a_b(t_tavern **sa, t_tavern **sb)
 {
 	shift_down_stack_a(sa, 0);
 	shift_down_stack_b(sb, 0);
-	write (1, "rrr\n", 4);
 }

@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 00:14:39 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/14 00:28:25 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/16 03:31:11 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	handling_errors(int argc, char *argv[], t_tavern **sa)
 			tmp = ft_lstnew_d(ft_atoi(len[j]));
 			ft_lstadd_back_d(sa, tmp, 1);
 		}
+		free_mem(len, j);
 	}
 	check_twin(sa, tmp);
 }

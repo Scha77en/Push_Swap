@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 02:11:21 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/13 23:49:50 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/16 03:31:54 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char	*get_word(char *str, int start, int finish)
 	return (word);
 }
 
-static void	*free_mem(char **ptr, int j)
+void	free_mem(char **ptr, int j)
 {
 	while (j >= 0)
 	{
@@ -56,7 +56,7 @@ static void	*free_mem(char **ptr, int j)
 		j--;
 	}
 	free(ptr);
-	return (0);
+	return ;
 }
 
 char	**ft_split(char *s, char c)

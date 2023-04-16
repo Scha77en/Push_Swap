@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 09:48:37 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/15 20:49:47 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/16 03:30:33 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	handling_errors(int argc, char *argv[], t_tavern **sa)
 			check_length(len[j]);
 			tmp = ft_lstnew_d(ft_atoi(len[j]));
 			ft_lstadd_back_d(sa, tmp, 1);
-			free_mem(len, j);
 		}
+		free_mem(len, j);
 	}
 	check_twin(sa);
 }
@@ -89,14 +89,8 @@ void	analyse_arg(char *str)
 	check_str(str, i, trigger);
 }
 
-void	leak()
-{
-	system("leaks push_swap");
-}
-
 int	main(int argc, char *argv[])
 {
-	// atexit(leak);
 	t_tavern	*sa;
 	t_tavern	*sb;
 	int			v;

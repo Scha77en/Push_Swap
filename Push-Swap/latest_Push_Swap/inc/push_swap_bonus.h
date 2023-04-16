@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 09:50:51 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/14 15:28:16 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/16 03:31:23 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ void		handling_errors(int argc, char *argv[], t_tavern **sa);
 void		check_twin(t_tavern **sa, t_tavern *tmp);
 void		analyse_arg(char *str);
 void		kay_oh(void);
+void		free_mem(char **ptr, int j);
 
 #endif

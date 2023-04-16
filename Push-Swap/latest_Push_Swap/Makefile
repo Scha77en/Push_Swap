@@ -1,25 +1,26 @@
 SOURCE = ./src
+OBJECTS = ./obj
 INCLUDE = ./inc
 SOURCE_BONUS = ./bonus
-OBJECTS = ./obj
 OBJECTS_BONUS = ./obj_bonus
 
 SRC = push_swap.c sa_sb_ss.c pa_pb.c ra_rb_rr.c rra_rrb_rrr.c linked_tools.c checking_tools.c setting_things.c \
 small_sorts.c tools_o_o.c error_tools.c
 
+OBJ = ${addprefix ${OBJECTS}/, ${SRC:.c=.o}}
+
 SRC_BONUS = sa_sb_ss.c pa_pb.c ra_rb_rr.c rra_rrb_rrr.c linked_tools.c checking_tools.c \
 error_tools.c main_checker.c get_next_line.c get_next_line_utils.c handling_errors.c
 
-OBJ = ${addprefix $(OBJECTS)/, ${SRC:.c=.o}}
-OBJ_BONUS = ${addprefix $(OBJECTS_BONUS)/, ${SRC_BONUS:.c=.o}}
+OBJ_BONUS = ${addprefix ${OBJECTS_BONUS}/, ${SRC_BONUS:.c=.o}}
 
 NAME = push_swap
+
 NAME_BONUS = checker
 
 CC = cc
 
 FLAGS = -Wall -Wextra -Werror 
-# -g -fsanitize=address 
 
 RM = rm -rf
 
