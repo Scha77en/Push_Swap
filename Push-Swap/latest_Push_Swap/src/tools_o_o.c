@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 02:51:07 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/13 23:38:17 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/18 03:29:12 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int	check_args_o_o(t_tavern **sa)
 	t_tavern	*current;
 
 	current = *sa;
+	if (!(*sa))
+		return (0);
 	while (1)
 	{
 		if (current->content > current->next->content)

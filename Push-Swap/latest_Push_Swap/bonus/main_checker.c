@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 18:07:58 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/14 15:30:12 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/18 03:37:41 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,15 @@ void	checking_moves(t_tavern **sa, t_tavern **sb, char *line)
 	else if (!ft_strcmp(line, "rrr\n"))
 		shift_down_stack_a_b(sa, sb);
 	else
-		kay_oh();
+		error_out();
 }
 
 int	check_stack(t_tavern **sa)
 {
 	t_tavern	*current;
 
+	if (!(*sa))
+		return (1);
 	current = *sa;
 	while (1)
 	{
@@ -58,7 +60,7 @@ int	check_stack(t_tavern **sa)
 
 int	stack_length(t_tavern **sa, int size)
 {
-	int		n_size;
+	int			n_size;
 
 	n_size = ft_lstsize(*sa);
 	if (n_size != size)
@@ -85,6 +87,8 @@ int	main(int argc, char *argv[])
 	handling_errors(argc, argv, &sa);
 	ft_lstadd_back_d(&sa, NULL, 0);
 	size = ft_lstsize(sa);
+	if (size == 0)
+		exit(0);
 	while (get_next_line(0, &line))
 	{
 		checking_moves(&sa, &sb, line);
@@ -92,7 +96,7 @@ int	main(int argc, char *argv[])
 	}
 	if (check_stack(&sa))
 		kay_oh();
-	else if (stack_length(&sa, size))
+	if (stack_length(&sa, size))
 		kay_oh();
 	else
 		write (2, "OK\n", 3);

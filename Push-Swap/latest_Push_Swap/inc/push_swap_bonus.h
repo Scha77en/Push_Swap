@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 09:50:51 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/16 03:31:23 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/18 03:30:39 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,6 @@ void		shift_down_stack_a_b(t_tavern **sa, t_tavern **sb);
 void		swap_a(t_tavern **head, int n);
 void		swap_b(t_tavern **head, int n);
 void		swap_a_b(t_tavern **ha, t_tavern **hb);
-void		swap_a(t_tavern **head, int n);
-void		swap_b(t_tavern **head, int n);
-void		swap_a_b(t_tavern **ha, t_tavern **hb);
 int			ft_strcmp(char *s1, char *s2);
 void		check_length(char *str);
 void		handling_errors(int argc, char *argv[], t_tavern **sa);
@@ -82,5 +79,6 @@ void		check_twin(t_tavern **sa, t_tavern *tmp);
 void		analyse_arg(char *str);
 void		kay_oh(void);
 void		free_mem(char **ptr, int j);
+int			push(t_tavern **stacka, t_tavern **stackb);
 
 #endif

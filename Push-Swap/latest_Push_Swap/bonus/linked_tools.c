@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 02:08:50 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/14 13:44:42 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/16 15:40:23 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	ft_lstadd_back_d(t_tavern **lst, t_tavern *new, int v)
 
 	if (v == 0)
 	{
+		if (!(*lst))
+			return ;
 		lnode = ft_lstlast_d(*(lst));
 		lnode -> next = *lst;
 		(*lst)-> previous = lnode;

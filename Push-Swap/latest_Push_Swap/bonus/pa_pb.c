@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:11:57 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/13 23:49:50 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/16 21:44:27 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,3 +51,46 @@ void	stack_check(t_tavern **stack)
 		*stack = (*stack)->next;
 	}
 }
+
+// int	push(t_tavern **stacka, t_tavern **stackb)
+// {
+// 	t_tavern	*tmp;
+// 	t_tavern	*heada;
+// 	t_tavern	*headb;
+
+// 	if (ft_lstsize(*stackb) == 0)
+// 		return (1);
+// 	heada = *stacka;
+// 	headb = *stackb;
+// 	tmp = headb;
+// 	headb = headb->next;
+// 	*stackb = headb;
+// 	if (!heada)
+// 	{
+// 		heada = tmp;
+// 		heada->next = NULL;
+// 		*stacka = heada;
+// 	}
+// 	else
+// 	{
+// 		tmp->next = heada;
+// 		*stacka = tmp;
+// 	}
+// 	return (0);
+// }
+
+// void	pa(t_tavern **stacka, t_tavern **stackb)
+// {
+// 	if (push(stacka, stackb) == 1)
+// 		return ;
+// 	write(2, "pa\n", 3);
+// 	return ;
+// }
+
+// void	pb(t_tavern **stacka, t_tavern **stackb)
+// {
+// 	if (push(stackb, stacka) == 1)
+// 		return ;
+// 	write(2, "pb\n", 3);
+// 	return ;
+// }

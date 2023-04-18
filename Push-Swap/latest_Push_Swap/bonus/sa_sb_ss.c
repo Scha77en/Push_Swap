@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:11:49 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/16 03:35:49 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/18 03:02:36 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,36 @@
 
 void	swap_a(t_tavern **head, int n)
 {
-	t_tavern	*temp;
-	t_tavern	*curr;
-	int			size;
+	int	tmp;
 
-	size = ft_lstsize(*head);
-	if (size <= 1)
-		return ;
-	temp = *head;
-	curr = *head;
-	*head = (*head)->next;
-	while (curr->next != temp)
-		curr = curr->next;
-	curr->next = *head;
-	temp->next = (*head)->next;
-	(*head)->next = temp;
 	if (n == 1)
 		write (1, "sa\n", 3);
+	if (*head)
+	{
+		tmp = (*head)->content;
+		if ((*head)->next)
+		{
+			(*head)->content = (*head)->next->content;
+			(*head)->next->content = tmp;
+		}
+	}
 }
 
 void	swap_b(t_tavern **head, int n)
 {
-	t_tavern	*temp;
-	t_tavern	*curr;
-	int			size;
+	int	tmp;
 
-	size = ft_lstsize(*head);
-	if (size <= 1)
-		return ;
-	temp = *head;
-	curr = *head;
-	*head = (*head)->next;
-	while (curr->next != temp)
-		curr = curr->next;
-	curr->next = *head;
-	temp->next = (*head)->next;
-	(*head)->next = temp;
 	if (n == 1)
 		write (1, "sb\n", 3);
+	if (*head)
+	{
+		tmp = (*head)->content;
+		if ((*head)->next)
+		{
+			(*head)->content = (*head)->next->content;
+			(*head)->next->content = tmp;
+		}
+	}
 }
 
 void	swap_a_b(t_tavern **ha, t_tavern **hb)
