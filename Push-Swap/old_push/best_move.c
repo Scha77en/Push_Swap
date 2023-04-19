@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 02:51:07 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/13 06:09:47 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/16 21:28:56 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	push_to_s(t_tavern **sa, t_tavern **sb, t_tavern *largest)
 		shift_down_stack_b(sb, 1);
 		largest->mb++;
 	}
-	push_to_stack(sb, sa, 0);
+	pa(sb, sa);
 }
 
 int		check_args_o_o(t_tavern **sa)

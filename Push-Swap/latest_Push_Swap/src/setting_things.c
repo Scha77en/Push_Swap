@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:02:57 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/18 03:28:15 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/18 15:17:37 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	sort_index(t_tavern **sa, t_tavern **sb, int v)
 	int			size;
 	int			z;
 
+	*sb = NULL;
 	z = 0;
 	size = ft_lstsize(*sa);
 	i = 0;
@@ -73,7 +74,7 @@ void	pushing_to_sb(t_tavern **sa, t_tavern **sb, int v, int z)
 		}
 		else if (current->value < z + t)
 		{
-			push_to_stack(sa, sb, 0);
+			push_to_stack(sa, sb, 1);
 			shift_up_stack_b(sb, 1);
 			z++;
 		}
@@ -89,7 +90,6 @@ void	push_from_sb(t_tavern **sa, t_tavern **sb)
 	int			position;
 
 	size = ft_lstsize(*sb);
-	printf("size of stack b: %d\n", size);
 	while (size)
 	{
 		largest = largest_node(sb);

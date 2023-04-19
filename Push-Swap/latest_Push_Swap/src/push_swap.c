@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 09:48:37 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/18 03:35:40 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/18 15:21:15 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ int	main(int argc, char *argv[])
 
 	v = 0;
 	sa = NULL;
-	sb = NULL;
 	handling_errors(argc, argv, &sa);
 	ft_lstadd_back_d(&sa, NULL, 0);
 	size = ft_lstsize(sa);

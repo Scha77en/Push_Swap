@@ -6,7 +6,7 @@
 /*   By: aouhbi <aouhbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 02:51:07 by aouhbi            #+#    #+#             */
-/*   Updated: 2023/04/18 03:29:12 by aouhbi           ###   ########.fr       */
+/*   Updated: 2023/04/18 14:17:15 by aouhbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	small_sorts(t_tavern **sa, t_tavern **sb)
 {
 	int		size;
 
+	*sb = NULL;
 	size = ft_lstsize(*sa);
 	if (size < 2)
 		exit(1);
